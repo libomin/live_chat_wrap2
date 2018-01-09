@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		 <meta name="apple-mobile-web-app-capable" content="yes">
+		 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no">
+	    <link rel="shortcut icon" href="http://www.igvault.com/favicon.ico" type="/image/x-icon">  
+		<title>IGVault Score</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+	</head>
+	<body class="bg_gray">
+		<header class="l_head clearfix">
+			<a href="" class="l_logo">
+				<img src="../images/igv_logo.png" alt="" />
+			</a>
+			<div class="l_live_r">
+				<span class="l_live_chat">Live Chat</span>
+				<span class="l_line">|</span>
+				<a href="" class="l_back">
+					<img src="../images/back_up.png" alt="" />
+				</a>
+			</div>
+		</header>
+		<section class="l_score">
+			<!--<form action="" onsubmit="return score()">-->
+			<form action="">	
+				<div class="l_score_cont">
+					<div class="l_score_top">
+						<h3>Chat Ended</h3>
+						<p>Thank you for choosing our service.</p>
+						<p>We value your opinions,which will help us improve our service.</p>
+					</div>
+					<div class="l_score_bot">
+						<div class="l_star">
+							<ul class="clearfix">
+								<li title="Very dissatisfied"></li>
+								<li title="Dissatisfied"></li>
+								<li title="General"></li>
+								<li title="Satisfied"></li>
+								<li title="Very satisfied"></li>
+							</ul>
+						</div>
+						<p class="l_satisfied">
+							Value:  <span>Please score~</span>
+						</p>
+						<div class="l_remarks">
+							<span>You are on the scoring remarks: </span>
+							<textarea name="" rows="" cols="" placeholder="Please enter no more than 200 words. "></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="l_btn">
+					<!--<input class="btn l_score_btn" type="submit" value="Submit"/>-->
+					<input class="btn l_score_btn" type="button" value="Submit"/>
+				</div>
+			</form>
+		</section>
+		<div class="l_mask_rate">
+			<div class="l_mask_cont">
+				<h3>Attention</h3>
+				<div class="l_isSelect">
+					<p>
+						Please select your rating
+					</p>
+					<a href="javascript:void(0);">Yes</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			//弹层居中
+			function tip_mask(){
+				var l=($(window).width()-$(".l_mask_rate .l_mask_cont").outerWidth())/2
+				var t=($(window).height()-$(".l_mask_rate .l_mask_cont").outerHeight())/2
+				$(".l_mask_rate .l_mask_cont").css({
+					"position":"absolute",
+					"left":l,
+					"top":t
+				})
+			}
+			//评分是否填写的检测
+			$(".l_score_btn").click(function(){
+				if($(".l_star li").hasClass("select_star")){
+					window.location.href="thanks.html"
+					return true;
+				}else{
+					$(".l_mask_rate").show()
+					tip_mask()
+					return false;
+				}
+			})
+			$(".l_mask_cont a").click(function(){
+				$(".l_mask_rate").hide()
+			})
+			$(".l_star li").click(function(){
+				$(".l_star li").removeClass("select_star")
+				$(this).addClass("select_star")
+				$(".l_satisfied span").html($(this).attr("title"))
+				var index=$(this).index()
+				for (var i=0;i<index;i++) {
+					$(".l_star li").eq(i).addClass("select_star")
+				}
+			})
+			
+//			$(".l_remarks textarea").blur(textVal)
+//			function textVal(){
+//				if($(".l_remarks textarea").val()!=""){
+//					$(".l_btn .l_score_btn").css("backgroundColor","#8fc31f")
+//				}
+//			}
+		</script>
+	</body>
+</html>

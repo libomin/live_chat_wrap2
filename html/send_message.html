@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		 <meta name="apple-mobile-web-app-capable" content="yes">
+		 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no">
+	    <link rel="shortcut icon" href="http://www.igvault.com/favicon.ico" type="/image/x-icon">  
+		<title>IGVault Send Message</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+	</head>
+	<body class="bg_gray">
+		<header class="l_head clearfix">
+			<a href="" class="l_logo">
+				<img src="../images/igv_logo.png" alt="" />
+			</a>
+			<div class="l_live_r">
+				<span class="l_live_chat">Live Chat</span>
+				<span class="l_line">|</span>
+				<a href="" class="l_back">
+					<img src="../images/back_up.png" alt="" />
+				</a>
+			</div>
+		</header>
+		<section class="l_mess_box">
+			<form action="message_ok.html" class="l_login_box" onsubmit="return message_check()">
+				<div class="l_mess_cont">
+					<p>Please send us a mail, we will reply you in 24 hours.</p>
+					<div class="l_mess_c">
+						<div class="l_mess_col l_send_name clearfix">
+							<span><i>*</i>Catalog:</span>
+							<div class="l_se_r l_se_list">
+								<select name="" class="l_color">
+									<option value="--please select a catalog--">--please select a catalog--</option>
+									<option value="--Delivery--">--Delivery--</option>
+									<option value="--Payment--">--Payment--</option>
+									<option value="--Verification--">--Verification--</option>
+									<option value="--Complain--">--Complain--</option>
+									<option value="--Suggestion--">--Suggestion--</option>
+									<option value="--Other--">--Other--</option>
+								</select>
+							</div>
+							<h3>Please complete the relevant information then click send!</h3>
+						</div>
+						<div class="l_mess_col  l_send_email clearfix">
+							<span><i>*</i>Subject:</span>
+							<div class="l_se_r l_se_email">
+								<input class="l_color" type="text" placeholder="Please enter the subject"/>
+								<div class="tip"></div>
+							</div>
+							<h3 class="l_error">Please enter the subject</h3>
+						</div>
+						<div class="l_mess_message clearfix">
+							<span><i>*</i>Question:</span>
+							<div class="l_se_r l_se_text">
+								<textarea class="l_color" name="" rows="" cols="" placeholder="Type your words here..."></textarea>
+							</div>
+							<h3>Type your words here</h3>
+						</div>
+					</div>
+				</div>
+				<div class="l_message_btn">
+					<input class="btn l_mess_btn" type="submit" value="Send"/>
+				</div>
+			</form>
+		</section>
+		<div class="l_tip">
+		</div>
+		<script>
+			var sel_val=$(".l_se_list select").val();
+			var sub_val=$(".l_se_email input").val();
+			var word_val=$(".l_se_text textarea").val();
+			function message_check(){
+				function tip_fn(){
+					$(".l_tip").show()
+					var l=($(window).width()-$(".l_tip h3").outerWidth())/2
+					var t=($(window).height()-$(".l_tip h3").outerHeight())/2
+					$(".l_tip h3").css({
+						"position":"absolute",
+						"left":l,
+						"top":t
+					})
+					$(".l_tip").click(function(){
+						$(this).hide()
+					})
+				}
+				function list_fn(){
+					var list_val=$(".l_se_list select").val()
+					if(list_val=="--please select a catalog--"){
+						$(".l_tip").append($(".l_send_name h3"))
+						tip_fn();
+						return false;
+					}else{
+						return true;
+					}
+				}
+				function sub_fn(){
+					var re_email=/^([a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,4})$/gi;
+					var email_val=$(".l_send_email input").val()
+					if(email_val==""){
+						$(".l_tip").find("h3").hide()
+						$(".l_tip").append($(".l_send_email .l_error"))
+						tip_fn();
+						return false;
+					}else{
+						return true;
+					}
+				}
+				function word_fn(){
+					var text_val=$(".l_mess_message textarea").val();
+					if(text_val==""){
+						$(".l_tip").find("h3").hide()
+						$(".l_tip").append($(".l_mess_message h3"))
+						tip_fn();
+						return false;
+					}else{
+						return true;
+					}
+				}
+				if(list_fn()&&sub_fn()&&word_fn()){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>

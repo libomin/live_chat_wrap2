@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		 <meta name="apple-mobile-web-app-capable" content="yes">
+		 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no">
+	    <link rel="shortcut icon" href="http://www.igvault.com/favicon.ico" type="/image/x-icon">  
+		<title>IGVault Login</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+	</head>
+	<body class="bg_orange">
+		<section class="l_login_cont">
+			<div class="l_login_top">
+				<a href="https://m.igvault.com/">
+					<img src="../images/big_logo.png" alt="" />
+				</a>
+			</div>
+			<div class="l_login_bot">
+				<form action="" class="l_login_box" onsubmit="return check_login()">
+					<div class="l_col l_name clearfix">
+						<div class="l_top">
+							<span>Name</span>
+							<div class="l_word_r">
+								<input type="text" placeholder="Please enter your name"/>
+							</div>
+						</div>
+						<h3>The username cannot be blank</h3>
+					</div>
+					<div class="l_col l_email clearfix">
+						<div class="l_top">
+							<span>Email</span>
+							<div class="l_word_r">
+								<input type="text" placeholder="A valid email adresse is required"/>
+							</div>
+						</div>
+						<h3 class="l_email2_tip">The Email cannot be blank</h3>
+						<h3 class="l_email2_tip2">A valid email adresse is required</h3>
+					</div>
+					<div class="l_col l_language clearfix">
+						<div class="l_top">
+							<span>Language</span>
+							<div class="l_word_r">
+								<select name="">
+									<option value="English">English </option>
+									<option value="Français">Français</option>
+									<option value="Deutsch">Deutsch</option>
+									<option value="Español">Español</option>
+									<option value="China">Chinese</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="start_chat">
+						<input type="submit" value="Start Chat"/>
+					</div>
+				</form>
+			</div>
+		</section>
+		<div class="l_tip">
+		</div>
+		<script>
+			function check_login(){
+				function tip_fn(){
+					$(".l_tip").show()
+					var l=($(window).width()-$(".l_tip h3").outerWidth())/2
+					var t=($(window).height()-$(".l_tip h3").outerHeight())/2
+					$(".l_tip h3").css({
+						"position":"absolute",
+						"left":l,
+						"top":t
+					})
+					$(".l_tip").click(function(){
+						$(this).hide()
+					})
+				}
+				//姓名验证
+				function name_check(){
+					var name=$(".l_name input").val();
+					if(name==""){ 
+						$(".l_tip").find("h3").hide();
+						$(".l_tip").append($(".l_name h3"))
+						tip_fn()
+						return false;
+					}else{
+						return true;
+					}
+				}
+				//邮箱验证
+				function email_check(){
+					var re_email=/^([a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,4})$/gi;
+					var email_val=$(".l_email input").val();
+					if(email_val==""){
+						$(".l_tip").find("h3").hide();
+						$(".l_tip").append($(".l_email .l_email2_tip"))
+						tip_fn()
+						return false;
+					}else if(!re_email.test(email_val)){
+						$(".l_tip").find("h3").hide();
+						$(".l_tip").append($(".l_email .l_email2_tip2"))
+						tip_fn()
+						return false;
+					}else{
+						return true;
+					}
+				}
+				if(name_check()&&email_check()){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>
